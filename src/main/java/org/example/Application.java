@@ -101,7 +101,7 @@ public class Application {
 
         maxProduct.forEach((customer, product) -> {
         if (product != null){
-            System.out.println(customer.getName()+ " -> "+ product.getName()+": "+ product.getPrice()+"€");
+            System.out.println( customer.getName()+ "-->"+product.getName()+": "+ product.getPrice()+"€");
         } else{
             System.out.println(customer.getName()+ " Nessun prodotto");
         }
@@ -109,6 +109,19 @@ public class Application {
 
             //!Esercizio 4
 
+        Map<Customer, Double> averageProduct= new HashMap<>();
+        ordersByCustomer.forEach((customer,orders) -> {
+            double averagePriceProduct= orders.stream().flatMap(order -> order.getProducts().stream()).mapToDouble(Product::getPrice).average().getAsDouble();
+            averageProduct.put(customer,averagePriceProduct);
+            });
+
+
+            System.out.println("La media dei prodotti per ogni cliente è: ");
+            averageProduct.forEach((customer, averagePriceProduct) -> {
+
+                System.out.println( customer.getName()+ "--> " + averagePriceProduct + "€");
+
+        });
 
 
 
